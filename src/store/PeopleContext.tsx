@@ -35,7 +35,7 @@ export const PeopleProvider: React.FC<Props> = ({ children }) => {
       .finally(() => {
         setIsLoading(false);
       });
-  }, []);
+  }, [people]);
 
   const value = useMemo(
     () => ({
