@@ -5,7 +5,7 @@ import { Loader } from '../components/Loader';
 import { PeopleTable } from '../components/PeopleTable';
 
 export const PeoplePages: React.FC = () => {
-  const { people, isError, isLoading, isEmptyList } = useContext(PeopleContext);
+  const { people, isError, isLoading } = useContext(PeopleContext);
 
   return (
     <>
@@ -20,7 +20,7 @@ export const PeoplePages: React.FC = () => {
             </p>
           )}
 
-          {isEmptyList && (
+          {!people.length && !isLoading && (
             <p data-cy="noPeopleMessage">There are no people on the server</p>
           )}
 
