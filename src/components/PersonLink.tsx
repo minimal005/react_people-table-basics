@@ -4,22 +4,20 @@ import { PeopleContext } from '../store/PeopleContext';
 import { Link, useParams } from 'react-router-dom';
 
 import { Person } from '../types';
-import { findChild } from '../service/people.service';
+import { findChild } from '../helpers/peopleHelper';
 
 import cn from 'classnames';
+import { Sex } from '../types/Sex';
 
 type Props = {
   person: Person;
 };
 export const PersonLink: React.FC<Props> = ({ person }) => {
   const { people } = useContext(PeopleContext);
+  const { sex, born, died, name, motherName, fatherName } = person;
 
-  const childByMother = person.motherName
-    ? findChild(people, person.motherName)
-    : null;
-  const childByFather = person.fatherName
-    ? findChild(people, person.fatherName)
-    : null;
+  const childByMother = motherName ? findChild(people, motherName) : null;
+  const childByFather = fatherName ? findChild(people, fatherName) : null;
 
   const { slug } = useParams();
 
@@ -33,33 +31,33 @@ export const PersonLink: React.FC<Props> = ({ person }) => {
       <td>
         <Link
           to={person.slug}
-          className={cn({ 'has-text-danger': person.sex === 'f' })}
+          className={cn({ 'has-text-danger': sex === Sex.F })}
         >
-          {person.name}
+          {name}
         </Link>
       </td>
 
-      <td>{person.sex}</td>
-      <td>{person.born}</td>
-      <td>{person.died}</td>
-      {!person.motherName && <td>-</td>}
-      {person.motherName &&
+      <td>{sex}</td>
+      <td>{born}</td>
+      <td>{died}</td>
+      {!motherName && <td>-</td>}
+      {motherName &&
         (!childByMother ? (
-          <td>{person.motherName}</td>
+          <td>{motherName}</td>
         ) : (
           <td>
             <Link className="has-text-danger" to={childByMother.slug}>
-              {person.motherName}
+              {motherName}
             </Link>
           </td>
         ))}
-      {!person.fatherName && <td>-</td>}
-      {person.fatherName &&
+      {!fatherName && <td>-</td>}
+      {fatherName &&
         (!childByFather ? (
-          <td>{person.fatherName}</td>
+          <td>{fatherName}</td>
         ) : (
           <td>
-            <Link to={childByFather.slug}>{person.fatherName}</Link>
+            <Link to={childByFather.slug}>{fatherName}</Link>
           </td>
         ))}
     </tr>

@@ -13,6 +13,7 @@ export const PeopleContext = React.createContext({
 type Props = {
   children: React.ReactNode;
 };
+
 export const PeopleProvider: React.FC<Props> = ({ children }) => {
   const [people, setPeople] = useState<Person[]>([]);
   const [isError, setIsError] = useState(false);

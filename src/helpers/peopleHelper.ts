@@ -5,3 +5,12 @@ export const findChild = (people: Person[], parentName: string) => {
 
   return findPerson;
 };
+
+export const columsByTable = [
+  'Name',
+  'Sex',
+  'Born',
+  'Died',
+  'Mother',
+  'Father',
+];

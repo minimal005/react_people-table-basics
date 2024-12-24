@@ -2,6 +2,7 @@ import React from 'react';
 
 import { PersonLink } from './PersonLink';
 import { Person } from '../types';
+import { columsByTable } from '../helpers/peopleHelper';
 
 type Props = {
   people: Person[];
@@ -14,12 +15,9 @@ export const PeopleTable: React.FC<Props> = ({ people }) => {
     >
       <thead>
         <tr>
-          <th>Name</th>
-          <th>Sex</th>
-          <th>Born</th>
-          <th>Died</th>
-          <th>Mother</th>
-          <th>Father</th>
+          {columsByTable.map(columnName => (
+            <th key={columnName}>{columnName}</th>
+          ))}
         </tr>
       </thead>
 
